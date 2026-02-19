@@ -33,5 +33,5 @@ public class MenuItemEntity {
     private String ingredients;
 
     @OneToMany(mappedBy = "menuItem")
-    private List<OrderEntryEntity> orderEntry;
+    private List<OrderEntryEntity> orderEntries;
 }
