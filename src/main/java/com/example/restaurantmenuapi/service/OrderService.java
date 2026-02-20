@@ -22,11 +22,9 @@ public interface OrderService {
 
     OrderDto updateTableById(UUID id, Integer tableNum);
 
-    OrderDto updateDateById(UUID id, Date date);
-
     OrderDto addEntry(UUID id, CreateOrderEntryDto createOrderEntryDto);
 
-    OrderDto updateEntry(UUID id, CreateOrderDto createOrderDto);
+    OrderDto updateEntry(UUID id, CreateOrderEntryDto createOrderEntryDto);
 
     OrderDto removeEntry(UUID id, UUID entryId);
 

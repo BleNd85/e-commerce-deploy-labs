@@ -16,5 +16,5 @@ public interface MenuItemService {
 
     MenuItemDto updateById(UUID id, CreateMenuItemDto createMenuItemDto);
 
-    void deleteByID(UUID id);
+    void deleteById(UUID id);
 }

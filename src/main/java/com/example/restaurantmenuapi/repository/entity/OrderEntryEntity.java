@@ -1,15 +1,13 @@
 package com.example.restaurantmenuapi.repository.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
-@Data
 @Entity
+@Getter
+@Setter
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor

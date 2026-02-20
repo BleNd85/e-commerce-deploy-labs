@@ -20,4 +20,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
     Page<OrderEntity> findAllByTableAndDate(Integer tableNum, Date start, Date end, Pageable pageable);
 
     Page<OrderEntity> findAllByDate(Date start, Date end, Pageable pageable);
+
+    Integer table(Integer table);
 }

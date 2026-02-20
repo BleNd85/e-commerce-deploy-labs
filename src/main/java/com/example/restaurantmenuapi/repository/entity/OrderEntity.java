@@ -1,9 +1,7 @@
 package com.example.restaurantmenuapi.repository.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +9,8 @@ import java.util.UUID;
 
 @Entity
 @Builder(toBuilder = true)
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "orders")
