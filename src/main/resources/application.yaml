@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: restaurant-menu-api
+
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 20
+  datasource:
+    driver-class-name: org.postgresql.Driver

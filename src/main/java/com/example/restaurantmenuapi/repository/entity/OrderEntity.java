@@ -26,7 +26,16 @@ public class OrderEntity {
     @Column(nullable = false)
     private Integer table;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrderEntryEntity> orderEntries;
 
+    public void addEntry(OrderEntryEntity orderEntry) {
+        orderEntries.add(orderEntry);
+        orderEntry.setOrder(this);
+    }
+
+    public void removeEntry(OrderEntryEntity orderEntry) {
+        orderEntries.remove(orderEntry);
+        orderEntry.setOrder(null);
+    }
 }

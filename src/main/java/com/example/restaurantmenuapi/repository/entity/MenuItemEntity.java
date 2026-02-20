@@ -32,6 +32,6 @@ public class MenuItemEntity {
     @Column(nullable = false)
     private String ingredients;
 
-    @OneToMany(mappedBy = "menuItem")
+    @OneToMany(mappedBy = "menuItem", fetch = FetchType.LAZY)
     private List<OrderEntryEntity> orderEntries;
 }

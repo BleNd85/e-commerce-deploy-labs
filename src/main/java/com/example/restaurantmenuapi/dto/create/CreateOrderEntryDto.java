@@ -10,9 +10,7 @@ import java.util.UUID;
 
 @Value
 @Builder(toBuilder = true)
-public class CreateOrderEntry {
-    @NotNull(message = "Order id is mandatory.")
-    UUID orderId;
+public class CreateOrderEntryDto {
 
     @NotNull(message = "Menu item id is mandatory.")
     UUID menuItemId;
