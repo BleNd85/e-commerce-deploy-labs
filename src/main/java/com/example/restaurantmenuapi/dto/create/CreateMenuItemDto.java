@@ -1,27 +1,29 @@
 package com.example.restaurantmenuapi.dto.create;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 @Value
+@AllArgsConstructor
 @Builder(toBuilder = true)
 public class CreateMenuItemDto {
     @NotBlank(message = "Name is mandatory.")
-    @Max(value = 128, message = "Name can not exceed 128 characters.")
+    @Length(min = 2, max = 128, message = "Name must be 2 to 128 characters long.")
     String name;
 
     @NotNull(message = "Price is mandatory.")
+    @Range(min = 1, max = 10000, message = "Price must be in range from 1 to 100000.")
     Integer price;
 
     @NotNull(message = "Weight is mandatory.")
+    @DecimalMin(value = "0.001", message = "Weight must be more or equal to 0.001.")
     Double weight;
 
     @NotBlank(message = "Ingredients are mandatory.")
-    @Min(value = 12, message = "Ingredients list must be at least 12 characters long.")
-    @Max(value = 128, message = "Ingredients list can not exceed 128 characters.")
+    @Length(min = 2, max = 128, message = "Ingredients list must be 10 to 128 characters long.")
     String ingredients;
 }
