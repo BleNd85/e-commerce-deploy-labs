@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-init-menu-items.yaml
+  - include:
+      file: db/changelog/db.changelog-init-orders.yaml
+  - include:
+      file: db/changelog/db.changelog-init-order-entries.yaml

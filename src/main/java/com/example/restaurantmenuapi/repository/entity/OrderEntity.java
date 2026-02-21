@@ -20,10 +20,10 @@ public class OrderEntity {
     @Column(nullable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "order_date", nullable = false)
     private Date date;
 
-    @Column(nullable = false)
+    @Column(name = "table_num", nullable = false)
     private Integer table;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

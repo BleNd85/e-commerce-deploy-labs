@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: init-menu-items
+      author: Vladyslav
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_menu_items
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(128)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: price
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: weight
+                  type: DOUBLE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ingredients
+                  type: VARCHAR(128)
+            tableName: menu_items
+
