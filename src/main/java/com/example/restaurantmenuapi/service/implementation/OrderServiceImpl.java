@@ -34,24 +34,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Page<OrderDto> getAll(Pageable pageable) {
-        Page<OrderEntity> pages = repository.findAll(pageable);
-        return pages.map(mapper::toDto);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<OrderDto> getAllByTableNumAndDate(Integer tableNum, Date start, Date end, Pageable pageable) {
-        Page<OrderEntity> pages = repository.findAllByTableAndDate(tableNum, start, end, pageable);
-        return pages.map(mapper::toDto);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<OrderDto> getAllByDate(Date start, Date end, Pageable pageable) {
-        Page<OrderEntity> pages = repository.findAllByDate(start, end, pageable);
-        return pages.map(mapper::toDto);
+    public Page<OrderDto> getAll(Integer tableNum, Date start, Date end, Pageable pageable) {
+        if (tableNum != null && start != null && end != null) {
+            return repository.findAllByTableAndDate(tableNum, start, end, pageable).map(mapper::toDto);
+        } else if (start != null && end != null) {
+            return repository.findAllByDate(start, end, pageable).map(mapper::toDto);
+        }
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     @Override
@@ -69,9 +58,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDto updateTableById(UUID id, Integer tableNum) {
+    public OrderDto updateTableById(UUID id, CreateOrderDto createOrderDto) {
         OrderEntity entity = repository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
-        entity.setTable(tableNum);
+        entity.setTable(createOrderDto.getTable());
         return mapper.toDto(repository.save(entity));
     }
 
@@ -92,14 +81,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDto updateEntry(UUID id, CreateOrderEntryDto createOrderEntryDto) {
-        OrderEntity orderEntity = repository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
+    public OrderDto updateEntry(UUID id, UUID entryId, CreateOrderEntryDto dto) {
+        OrderEntity orderEntity = repository.findById(id)
+                .orElseThrow(() -> new OrderNotFoundException(id));
         OrderEntryEntity orderEntryEntity = orderEntity.getOrderEntries().stream()
-                .filter(e -> e.getMenuItem().getId().equals(createOrderEntryDto.getMenuItemId()))
+                .filter(e -> e.getId().equals(entryId))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Entry with this menu item not found in order."));
+                .orElseThrow(() -> new OrderEntryNotFoundException(entryId));
 
-        orderEntryEntity.setQuantity(createOrderEntryDto.getQuantity());
+        orderEntryEntity.setQuantity(dto.getQuantity());
+
         return mapper.toDto(repository.save(orderEntity));
     }
 

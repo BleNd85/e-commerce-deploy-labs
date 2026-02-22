@@ -10,21 +10,17 @@ import java.util.Date;
 import java.util.UUID;
 
 public interface OrderService {
-    Page<OrderDto> getAll(Pageable pageable);
-
-    Page<OrderDto> getAllByTableNumAndDate(Integer tableNum, Date start, Date end, Pageable pageable);
-
-    Page<OrderDto> getAllByDate(Date start, Date end, Pageable pageable);
+    Page<OrderDto> getAll(Integer tableNum, Date start, Date end, Pageable pageable);
 
     OrderDto getById(UUID id);
 
     OrderDto save(CreateOrderDto createOrderDto);
 
-    OrderDto updateTableById(UUID id, Integer tableNum);
+    OrderDto updateTableById(UUID id, CreateOrderDto createOrderDto);
 
     OrderDto addEntry(UUID id, CreateOrderEntryDto createOrderEntryDto);
 
-    OrderDto updateEntry(UUID id, CreateOrderEntryDto createOrderEntryDto);
+    OrderDto updateEntry(UUID id, UUID entryId, CreateOrderEntryDto dto);
 
     OrderDto removeEntry(UUID id, UUID entryId);
 
