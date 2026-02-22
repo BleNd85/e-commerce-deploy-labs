@@ -19,16 +19,23 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog.yaml
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+server:
+  shutdown: graceful
 
 management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health, shutdown
       base-path: /
   endpoint:
     health:
       show-details: always
+    shutdown:
+      enabled: true
   health:
     defaults:
       enabled: false
