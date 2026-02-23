@@ -1,6 +1,5 @@
 package com.example.restaurantmenuapi.service.mapper;
 
-import com.example.restaurantmenuapi.dto.MenuItemDto;
 import com.example.restaurantmenuapi.dto.create.CreateMenuItemDto;
 import com.example.restaurantmenuapi.repository.entity.MenuItemEntity;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +33,5 @@ public class MenuItemMapperTest {
         assertEquals(createMenuItemDto.getIngredients(), menuItemEntity.getIngredients());
         assertEquals(createMenuItemDto.getPrice(), menuItemEntity.getPrice());
         assertEquals(createMenuItemDto.getWeight(), menuItemEntity.getWeight());
-
     }
 }
