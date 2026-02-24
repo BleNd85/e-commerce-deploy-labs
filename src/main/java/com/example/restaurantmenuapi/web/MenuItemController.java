@@ -28,7 +28,7 @@ public class MenuItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MenuItemDto> getById(@PathVariable UUID id) {
+    public ResponseEntity<MenuItemDto> getById(@PathVariable("id") UUID id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
@@ -38,12 +38,12 @@ public class MenuItemController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<MenuItemDto> updateById(@PathVariable UUID id, @RequestBody @Valid CreateMenuItemDto createMenuItemDto) {
+    public ResponseEntity<MenuItemDto> updateById(@PathVariable("id") UUID id, @RequestBody @Valid CreateMenuItemDto createMenuItemDto) {
         return ResponseEntity.ok(service.updateById(id, createMenuItemDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteById(@PathVariable("id") UUID id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }

@@ -27,9 +27,9 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<Page<OrderDto>> getAll(
-            @RequestParam(required = false) Integer tableNum,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date start,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date end,
+            @RequestParam(name = "tableNum", required = false) Integer tableNum,
+            @RequestParam(name = "start", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date start,
+            @RequestParam(name = "end", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date end,
             @ParameterObject @PageableDefault(size = 10, sort = "date") Pageable pageable) {
 
         return ResponseEntity.ok(service.getAll(tableNum, start, end, pageable));
@@ -41,33 +41,33 @@ public class OrderController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<OrderDto> updateById(@PathVariable UUID id, @RequestBody @Valid CreateOrderDto createOrderDto) {
+    public ResponseEntity<OrderDto> updateById(@PathVariable("id") UUID id, @RequestBody @Valid CreateOrderDto createOrderDto) {
         return ResponseEntity.ok(service.updateTableById(id, createOrderDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDto> getById(@PathVariable UUID id) {
+    public ResponseEntity<OrderDto> getById(@PathVariable("id") UUID id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteById(@PathVariable("id") UUID id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/entries")
-    public ResponseEntity<OrderDto> createEntry(@PathVariable UUID id, @RequestBody @Valid CreateOrderEntryDto createOrderEntryDto) {
+    public ResponseEntity<OrderDto> createEntry(@PathVariable("id") UUID id, @RequestBody @Valid CreateOrderEntryDto createOrderEntryDto) {
         return ResponseEntity.ok(service.addEntry(id, createOrderEntryDto));
     }
 
     @PatchMapping("/{orderId}/entries/{entryId}")
-    public ResponseEntity<OrderDto> updateEntryById(@PathVariable UUID orderId, @PathVariable UUID entryId, CreateOrderEntryDto createOrderEntryDto) {
+    public ResponseEntity<OrderDto> updateEntryById(@PathVariable("id") UUID orderId, @PathVariable UUID entryId, CreateOrderEntryDto createOrderEntryDto) {
         return ResponseEntity.ok(service.updateEntry(orderId, entryId, createOrderEntryDto));
     }
 
     @DeleteMapping("/{orderId}/entries/{entryId}")
-    public ResponseEntity<OrderDto> deleteEntryById(@PathVariable UUID orderId, @PathVariable UUID entryId) {
+    public ResponseEntity<OrderDto> deleteEntryById(@PathVariable("id") UUID orderId, @PathVariable UUID entryId) {
         return ResponseEntity.ok(service.removeEntry(orderId, entryId));
     }
 }
