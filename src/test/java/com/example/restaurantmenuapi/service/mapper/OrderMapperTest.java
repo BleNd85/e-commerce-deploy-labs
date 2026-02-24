@@ -15,7 +15,6 @@ public class OrderMapperTest {
     @BeforeEach
     public void setUp() {
         mapper = Mappers.getMapper(OrderMapper.class);
-        Mappers.getMapper(MenuItemMapper.class);
     }
 
     @Test
