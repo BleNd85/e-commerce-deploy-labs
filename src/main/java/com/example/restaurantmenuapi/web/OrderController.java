@@ -62,12 +62,12 @@ public class OrderController {
     }
 
     @PatchMapping("/{orderId}/entries/{entryId}")
-    public ResponseEntity<OrderDto> updateEntryById(@PathVariable("id") UUID orderId, @PathVariable UUID entryId, CreateOrderEntryDto createOrderEntryDto) {
+    public ResponseEntity<OrderDto> updateEntryById(@PathVariable("orderId") UUID orderId, @PathVariable("entryId") UUID entryId, @RequestBody @Valid CreateOrderEntryDto createOrderEntryDto) {
         return ResponseEntity.ok(service.updateEntry(orderId, entryId, createOrderEntryDto));
     }
 
     @DeleteMapping("/{orderId}/entries/{entryId}")
-    public ResponseEntity<OrderDto> deleteEntryById(@PathVariable("id") UUID orderId, @PathVariable UUID entryId) {
+    public ResponseEntity<OrderDto> deleteEntryById(@PathVariable("orderId") UUID orderId, @PathVariable("entryId") UUID entryId) {
         return ResponseEntity.ok(service.removeEntry(orderId, entryId));
     }
 }
