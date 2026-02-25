@@ -14,7 +14,7 @@ curl -i localhost:8080/health
 ![health200.png](https://github.com/user-attachments/assets/0ce0dae8-ae7d-49fc-9403-8ab16788ced2)
 
 ### Status: Database Stopped
-![health503.png](https://github.com/user-attachments/assets/3ed250ce-d118-4635-8174-5d46783aa9fa)
+![health503.png](https://github.com/user-attachments/assets/6ca4f34e-8915-420b-98c7-c5d6fefd2e6e)
 
 
 ## Startup Logs
