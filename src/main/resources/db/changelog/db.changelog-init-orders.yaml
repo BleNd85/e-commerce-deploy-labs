@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: init-orders
+      author: Vladyslav
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_orders
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: order_date
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  name: table_num
+                  type: INTEGER
+            tableName: orders
+
