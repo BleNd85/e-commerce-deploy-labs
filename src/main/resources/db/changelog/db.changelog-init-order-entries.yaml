@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: init-order-entries
+      author: Vladyslav
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_order_entries
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: quantity
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: menu_item_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: order_id
+                  type: UUID
+            tableName: order_entries
+  - changeSet:
+      id: add-fk-order-entries-menu-item
+      author: Vladyslav
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: menu_item_id
+            baseTableName: order_entries
+            constraintName: FK_ORDER_ENTRIES_ON_MENU_ITEM
+            referencedColumnNames: id
+            referencedTableName: menu_items
+  - changeSet:
+      id: add-fk-order-entries-order
+      author: Vladyslav
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: order_entries
+            constraintName: FK_ORDER_ENTRIES_ON_ORDER
+            referencedColumnNames: id
+            referencedTableName: orders
+            onDelete: CASCADE
+
