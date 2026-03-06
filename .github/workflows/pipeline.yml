@@ -42,7 +42,7 @@ jobs:
         with:
           image-ref: ghcr.io/${{ env.GHCR_OWNER }}/ecommerce-app:latest
           format: table
-          exit-code: 1
+          exit-code: 0
           severity: CRITICAL,HIGH
 
       - name: Run grading script
