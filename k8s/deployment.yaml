@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ecommerce-app
-          image: ecommerce-app:latest
+          image: ghcr.io/blend85/ecommerce-app:latest
           ports:
             - containerPort: 8080
           envFrom:
