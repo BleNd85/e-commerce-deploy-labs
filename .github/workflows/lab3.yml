@@ -1,6 +1,6 @@
 name: Lab 3 - KinD Deployment
 
-on: [workflow_dispatch]
+on: [workflow_call]
 
 jobs:
   deploy:

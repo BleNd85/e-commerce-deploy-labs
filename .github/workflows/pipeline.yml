@@ -7,7 +7,6 @@ on:
 permissions:
   contents: read
   packages: write
-  actions: write
 
 jobs:
   build:
@@ -51,7 +50,6 @@ jobs:
           chmod +x ./tests/lab2_test.sh
           ./tests/lab2_test.sh
 
-      - name: Trigger Lab3 workflow
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: lab3.yml
+  deploy:
+    needs: build
+    uses: ./.github/workflows/lab3.yml
