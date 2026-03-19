@@ -53,4 +53,4 @@ jobs:
       - name: Trigger Lab3 workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: lab3
+          workflow: lab3.yml
