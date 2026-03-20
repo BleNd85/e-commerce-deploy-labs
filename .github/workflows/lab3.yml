@@ -24,7 +24,7 @@ jobs:
           kubectl wait --for=condition=ready pod -l app=db --timeout=120s
           kubectl wait --for=condition=ready pod -l app=ecommerce-app --timeout=120s
 
-      - name: Run Master Validation Script
+      - name: Run Grading Script
         run: |
           chmod +x ./tests/lab3_test.sh
           ./tests/lab3_test.sh
