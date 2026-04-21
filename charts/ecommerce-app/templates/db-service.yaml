@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ecommerce-app.db.fullname" . }}
+  labels:
+    {{- include "ecommerce-app.db.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "ecommerce-app.db.selectorLabels" . | nindent 4 }}
+  ports:
+    - port: {{ .Values.config.dbPort }}
+      targetPort: {{ .Values.config.dbPort }}

@@ -1,0 +1,46 @@
+# nameOverride overrides the chart name used in resource names and labels
+nameOverride: ""
+
+# fullnameOverride overrides the fully qualified app name
+fullnameOverride: ""
+
+# dbNameOverride overrides the database resource name
+dbNameOverride: ""
+
+# replicaCount is the number of application pod replicas
+replicaCount: 2
+
+# image is the application container image configuration
+image:
+  repository: ghcr.io/blend85/ecommerce-app
+  tag: latest
+
+# service defines the app service port configuration
+service:
+  port: 80
+  targetPort: 8080
+
+# resources defines CPU and memory limits and requests for the app container
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# db contains configuration for the PostgreSQL database
+db:
+  image:
+    repository: postgres
+    tag: 18-alpine
+  name: ecommerce
+  user: postgres
+  password: postgres
+
+# config contains environment variables passed via ConfigMap
+config:
+  dbPort: "5432"
+  dbHost: db-service
+  dbName: ecommerce
+  dbUser: postgres

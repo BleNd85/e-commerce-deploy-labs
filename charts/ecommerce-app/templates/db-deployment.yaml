@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ecommerce-app.db.fullname" . }}
+  labels:
+    {{- include "ecommerce-app.db.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "ecommerce-app.db.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "ecommerce-app.db.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ include "ecommerce-app.db.name" . }}
+          image: {{ .Values.db.image.repository }}:{{ .Values.db.image.tag }}
+          ports:
+            - containerPort: {{ .Values.config.dbPort }}
+          env:
+            - name: POSTGRES_DB
+              value: {{ .Values.db.name | quote }}
+            - name: POSTGRES_USER
+              value: {{ .Values.db.user | quote }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "ecommerce-app.fullname" . }}
+                  key: DB_PASSWORD
