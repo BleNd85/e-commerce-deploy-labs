@@ -2,9 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
-      - lab2
+    branches: ["**"]
 
 permissions:
   contents: read
@@ -51,3 +49,7 @@ jobs:
         run: |
           chmod +x ./tests/lab2_test.sh
           ./tests/lab2_test.sh
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/lab3.yml

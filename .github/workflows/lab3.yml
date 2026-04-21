@@ -1,0 +1,30 @@
+name: Lab 3 - KinD Deployment
+
+on: [workflow_call]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create KinD cluster
+        uses: helm/kind-action@v1
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Apply k8s manifests
+        run: kubectl apply -f k8s/
+
+      - name: Wait for pods to be ready
+        run: |
+          kubectl wait --for=condition=ready pod -l app=db --timeout=120s
+          kubectl wait --for=condition=ready pod -l app=ecommerce-app --timeout=120s
+
+      - name: Run Grading Script
+        run: |
+          chmod +x ./tests/lab3_test.sh
+          ./tests/lab3_test.sh
